@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
+import ErrorCard from './ErrorCard.tsx'
+import { LoadingIcon } from './icons.tsx'
 import ProductList from './ProductList.tsx'
-import {LoadingIcon} from './icons.tsx'
 
 export type Tags = 'tag1' | 'tag2' | 'tag3' | 'tag4'
 
@@ -29,7 +30,7 @@ async function fetchProducts(): Promise<ApiDataResponse | void> {
 }
 
 export default function ProductListPage() {
-  const { data, isPending } = useQuery({
+  const { data, isPending, error } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
   })
@@ -47,6 +48,8 @@ export default function ProductListPage() {
             <div className="z-5 absolute inset-0 h-full w-full bg-white/40 backdrop-blur-sm" />
           </>
         )}
+        {/* The query encountered an error */}
+        {error && <ErrorCard />}
       </section>
     </>
   )
