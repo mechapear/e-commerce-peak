@@ -1,5 +1,5 @@
+import { ApiDataResponse } from '../routes/products.index.tsx'
 import { distinctArray } from '../utils/distinctArray.ts'
-import { ApiDataResponse } from './ProductListPage.tsx'
 
 type ProductListProps = {
   products: ApiDataResponse['products'] | undefined
