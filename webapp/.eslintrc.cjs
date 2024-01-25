@@ -7,7 +7,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', '.prettierrc.cjs', 'tailwind.config.cjs', 'postcss.config.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', '.prettierrc.cjs', 'tailwind.config.cjs', 'postcss.config.cjs', 'routeTree.gen.ts'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'import', 'unused-imports'],
   rules: {
