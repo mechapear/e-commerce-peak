@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-// create routes other than the root route using the 'FileRoute' class
-export const Route = new FileRoute('/').createRoute({
+// TODO: now we don't have a home page -> handle this by redirect to products page
+
+export const Route = createFileRoute('/')({
   component: HomePage,
 })
 
