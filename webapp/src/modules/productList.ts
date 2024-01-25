@@ -9,29 +9,30 @@ export type Product = {
 
 export type ProductsApiResponse = Product[]
 
+export type ProductApiResponse = Product | null
+
 export async function fetchProducts(): Promise<ProductsApiResponse | void> {
   try {
-    return fetch('http://localhost:3000/api/products').then(
+    return await fetch('http://localhost:3000/api/products').then(
       (response) => response.json() as Promise<ProductsApiResponse>,
     )
   } catch (error) {
-    // for debugging
+    // For debugging
     console.log('fetchProducts error: ', { error })
   }
 }
 
-// TODO: change this function to fetch prooduct directly to api
-// Assume that we cannot change anyting in the API
-// export async function fetchProductById(id: number): Promise<Product | void> {
-//   const data = await fetchProducts()
-//   if (!data) return
-//   // Find product by id
-//   const product = data.products.find((product) => product.id === id)
-//   // Logging error, if product not found
-//   if (!product) {
-//     return console.log(
-//       `fetchProductById error: product with id ${id} not found!`,
-//     )
-//   }
-//   return product
-// }
+export async function fetchProductById(
+  id: number,
+): Promise<ProductApiResponse> {
+  try {
+    // Send productId to server through path params
+    return await fetch(`http://localhost:3000/api/product/${id}`).then(
+      (response) => response.json() as Promise<ProductApiResponse>,
+    )
+  } catch (error) {
+    // For debugging
+    console.log(`fetchProductById error: Product with id ${id} does not exist`)
+    return null
+  }
+}
