@@ -1,4 +1,4 @@
-import { Product } from '../routes/products.index.tsx'
+import { Product } from './productList.ts'
 
 // for testing ui
 const MOCK_PRODUCT: Product = {

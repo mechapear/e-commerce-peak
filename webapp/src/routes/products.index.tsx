@@ -1,41 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
-import { FileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import ErrorCard from '../modules/ErrorCard.tsx'
 import { LoadingIcon } from '../modules/icons.tsx'
-import ProductList from '../modules/ProductList.tsx'
+import { fetchProducts } from '../modules/productList.ts'
+import { distinctArray } from '../utils/distinctArray.ts'
 
-// create routes other than the root route using the 'FileRoute' class
-export const Route = new FileRoute('/products/').createRoute({
-  component: ProductListPage,
+export const Route = createFileRoute('/products/')({
+  component: ProductList,
 })
 
-export type Tags = 'tag1' | 'tag2' | 'tag3' | 'tag4'
-
-export type Product = {
-  id: number
-  title: string
-  description: string
-  photos: string[]
-  price: number
-  tags: Tags[]
-}
-
-export type ApiDataResponse = {
-  products: Product[]
-}
-
-async function fetchProducts(): Promise<ApiDataResponse | void> {
-  try {
-    return fetch('http://localhost:3000/').then(
-      (response) => response.json() as Promise<ApiDataResponse>,
-    )
-  } catch (error) {
-    // for debugging
-    console.log('getProducts error: ', { error })
-  }
-}
-
-export default function ProductListPage() {
+function ProductList() {
   const { data, isPending, error } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
@@ -43,22 +17,50 @@ export default function ProductListPage() {
 
   return (
     <>
-      <section className="mx-auto px-4 py-16 sm:px-6 sm:py-24 md:max-w-4xl lg:px-8">
-        <h1 className="text-lg font-medium text-gray-900">Product List Page</h1>
-        <section className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          {/* success */}
-          <ProductList products={data?.products} />
-          {/* The query has no data / cached data yet */}
-          {isPending && (
-            <>
-              <LoadingIcon />
-              <div className="z-5 absolute inset-0 h-full w-full bg-white/40 backdrop-blur-sm" />
-            </>
-          )}
-          {/* The query encountered an error */}
-          {error && <ErrorCard />}
-        </section>
-      </section>
+      {/* success */}
+      <ul className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        {data?.products?.map((product) => {
+          return (
+            <li>
+              {/* Path params are passed to the loader as a params object */}
+              {/* Params are string values */}
+              {/* { key: <productId>, value: <product.id> } */}
+              <Link
+                key={product.id}
+                to="/products/$productId"
+                params={{ productId: product.id.toString() }}
+                className="group"
+              >
+                <div className="aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg bg-gray-200">
+                  <img
+                    src={product.photos[0]}
+                    alt={product.title}
+                    className="h-full w-full object-cover object-center group-hover:opacity-75"
+                  />
+                </div>
+                <h3 className="mb-1 mt-4 font-medium text-gray-700">
+                  {product.title}
+                </h3>
+
+                {distinctArray(product.tags).map((tag) => (
+                  <span className="me-2 rounded bg-gray-100 px-2.5 py-1 text-xs text-gray-800">
+                    {tag}
+                  </span>
+                ))}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+      {/* The query has no data / cached data yet */}
+      {isPending && (
+        <>
+          <LoadingIcon />
+          <div className="z-5 absolute inset-0 h-full w-full bg-white/40 backdrop-blur-sm" />
+        </>
+      )}
+      {/* The query encountered an error */}
+      {error && <ErrorCard />}
     </>
   )
 }
