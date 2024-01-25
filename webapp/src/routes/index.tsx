@@ -1,4 +1,4 @@
-import { FileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 
 // create routes other than the root route using the 'FileRoute' class
 export const Route = new FileRoute('/').createRoute({
