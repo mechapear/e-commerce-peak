@@ -19,14 +19,14 @@ function ProductList() {
     <>
       {/* success */}
       <ul className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-        {data?.products?.map((product) => {
+        {data?.map((product) => {
+          console.log(product.id)
           return (
-            <li>
+            <li key={product.id}>
               {/* Path params are passed to the loader as a params object */}
               {/* Params are string values */}
               {/* { key: <productId>, value: <product.id> } */}
               <Link
-                key={product.id}
                 to="/products/$productId"
                 params={{ productId: product.id.toString() }}
                 className="group"
@@ -43,7 +43,10 @@ function ProductList() {
                 </h3>
 
                 {distinctArray(product.tags).map((tag) => (
-                  <span className="me-2 rounded bg-gray-100 px-2.5 py-1 text-xs text-gray-800">
+                  <span
+                    key={tag}
+                    className="me-2 rounded bg-gray-100 px-2.5 py-1 text-xs text-gray-800"
+                  >
                     {tag}
                   </span>
                 ))}
