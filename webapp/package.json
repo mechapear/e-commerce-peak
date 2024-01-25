@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.17.19",
+    "@tanstack/react-router": "^1.12.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.17.20",
+    "@tanstack/router-vite-plugin": "^1.12.3",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
