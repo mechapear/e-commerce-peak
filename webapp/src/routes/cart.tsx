@@ -1,8 +1,13 @@
+import { createFileRoute } from '@tanstack/react-router'
 import useLocalStorageState from 'use-local-storage-state'
+import { CartItem } from '../modules/ProductDetail.tsx'
 import { convertToBahtCurrency } from '../utils/convertToBahtCurrency.ts'
-import { CartItem } from './ProductDetail.tsx'
 
-export default function CartPage() {
+export const Route = createFileRoute('/cart')({
+  component: CartPage,
+})
+
+function CartPage() {
   const [cart, setCart] = useLocalStorageState<CartItem[]>('shopping-cart', {
     defaultValue: [],
   })
