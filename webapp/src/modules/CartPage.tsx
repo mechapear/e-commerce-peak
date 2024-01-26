@@ -46,10 +46,15 @@ export default function CartPage() {
                     />
                   </div>
                   {/* Product info */}
-                  <div className="ml-4 flex flex-1 flex-col">
+                  <div className="ml-4 flex flex-1 flex-col gap-2">
                     <div className="flex justify-between text-base font-medium text-gray-900">
-                      <h3>{cartItem.title}</h3>
-                      <p className="ml-4">
+                      <div className="flex flex-col gap-2">
+                        <h3>{cartItem.title}</h3>
+                        <p className="text-sm font-normal text-gray-500">
+                          {convertToBathCurrency(cartItem.price)}
+                        </p>
+                      </div>
+                      <p className="ml-2 md:ml-4 ">
                         {calculatePrice(cartItem.price, cartItem.quantity)}
                       </p>
                     </div>
