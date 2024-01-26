@@ -21,7 +21,7 @@ function DetailPage() {
 
   return (
     <>
-      <section className="mx-auto grid max-w-2xl place-items-center gap-x-8 gap-y-10 px-4 py-16 sm:px-6 sm:py-24 md:max-w-4xl md:grid-cols-2 md:place-items-start lg:px-8">
+      <section className="mx-auto grid max-w-2xl place-items-center gap-x-14 gap-y-10 md:max-w-4xl md:grid-cols-2 md:place-items-start">
         {/* Success, the query has deta */}
         {data && <ProductDetail product={data} />}
         {/* The query has no data / cached data yet */}
