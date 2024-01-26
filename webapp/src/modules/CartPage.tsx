@@ -1,4 +1,5 @@
 import useLocalStorageState from 'use-local-storage-state'
+import { convertToBahtCurrency } from '../utils/convertToBahtCurrency.ts'
 import { CartItem } from './ProductDetail.tsx'
 
 export default function CartPage() {
@@ -51,7 +52,7 @@ export default function CartPage() {
                       <div className="flex flex-col gap-2">
                         <h3>{cartItem.title}</h3>
                         <p className="text-sm font-normal text-gray-500">
-                          {convertToBathCurrency(cartItem.price)}
+                          {convertToBahtCurrency(cartItem.price)}
                         </p>
                       </div>
                       <p className="ml-2 md:ml-4 ">
@@ -119,18 +120,9 @@ function ContinueShoppingBtn() {
   )
 }
 
-function convertToBathCurrency(value: number) {
-  return value.toLocaleString('th-TH', {
-    style: 'currency',
-    currency: 'THB',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  })
-}
-
 function calculatePrice(price: number, quantity: number) {
   // Calculate price of each cart item and convert to bath currency
-  return convertToBathCurrency(price * quantity)
+  return convertToBahtCurrency(price * quantity)
 }
 
 function calculateSubTotal(cart: CartItem[]) {
@@ -143,5 +135,5 @@ function calculateSubTotal(cart: CartItem[]) {
     subTotal += price
   })
   // Convert to bath currency
-  return convertToBathCurrency(subTotal)
+  return convertToBahtCurrency(subTotal)
 }
