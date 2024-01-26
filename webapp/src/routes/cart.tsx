@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import useLocalStorageState from 'use-local-storage-state'
 import { CartItem } from '../modules/ProductDetail.tsx'
 import { convertToBahtCurrency } from '../utils/convertToBahtCurrency.ts'
@@ -31,7 +31,7 @@ function CartPage() {
       {isCartEmpty && (
         <div className="my-8 flex justify-center border-y border-gray-200 py-12 text-center md:py-16">
           <h3 className="text-gray-500">
-            Shopping cart is empty. <ContinueShoppingBtn />
+            Shopping cart is empty. <ContinueShoppingLink />
           </h3>
         </div>
       )}
@@ -104,7 +104,7 @@ function CartPage() {
           </div>
           <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
             <p>
-              or <ContinueShoppingBtn />
+              or <ContinueShoppingLink />
             </p>
           </div>
         </div>
@@ -113,15 +113,16 @@ function CartPage() {
   )
 }
 
-function ContinueShoppingBtn() {
+function ContinueShoppingLink() {
   return (
-    <button
+    <Link
       type="button"
       className="text-blue-600 hover:text-blue-500"
-      onClick={() => alert("You're redirecting to Product list page.")}
+      // Redirect user to the Product list page (/products)
+      to={'/products'}
     >
       Continue Shopping
-    </button>
+    </Link>
   )
 }
 
