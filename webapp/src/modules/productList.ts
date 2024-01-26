@@ -11,7 +11,9 @@ export type ProductsApiResponse = Product[]
 
 export type ProductApiResponse = Product | null
 
-export async function fetchProducts(): Promise<ProductsApiResponse | void> {
+export async function fetchProducts(): Promise<
+  ProductsApiResponse | undefined
+> {
   try {
     return await fetch('http://localhost:3000/api/products').then(
       (response) => response.json() as Promise<ProductsApiResponse>,
@@ -19,6 +21,7 @@ export async function fetchProducts(): Promise<ProductsApiResponse | void> {
   } catch (error) {
     // For debugging
     console.log('fetchProducts error: ', { error })
+    return undefined
   }
 }
 

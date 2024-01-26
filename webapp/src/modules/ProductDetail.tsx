@@ -95,7 +95,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </div>
         <div className="my-7 flex gap-x-2 md:my-7">
           <input
-            className="mb-2 me-2 max-w-20 rounded-lg border border-gray-800 px-4 py-2.5 text-sm text-gray-900 outline-none"
+            className="me-2 max-w-20 rounded-lg border border-gray-800 px-4 py-2.5 text-sm text-gray-900 outline-none"
             type="number"
             name="productQuantity"
             min="1"
@@ -108,7 +108,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           {/* Add to cart section */}
           <button
             type="button"
-            className="mb-2 me-2 w-full rounded-lg bg-gray-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-900"
+            className="me-2 w-full rounded-lg bg-gray-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-900"
             onClick={handleAddToCart}
           >
             Add to cart
