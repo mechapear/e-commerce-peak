@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useLocalStorageState from 'use-local-storage-state'
+import { convertToBahtCurrency } from '../utils/convertToBahtCurrency.ts'
 import { Product } from './productList.ts'
 
 export type CartItem = {
@@ -85,7 +86,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
             {product.title}
           </h1>
-          <p className="my-2 text-2xl">${product.price}</p>
+          <p className="my-2 text-2xl">
+            {convertToBahtCurrency(product.price)}
+          </p>
           <p className="mt-4 space-y-6 break-words text-gray-900">
             {product.description}
           </p>
