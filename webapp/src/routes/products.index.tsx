@@ -20,7 +20,6 @@ function ProductList() {
       {/* success */}
       <ul className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
         {data?.map((product) => {
-          console.log(product.id)
           return (
             <li key={product.id}>
               {/* Path params are passed to the loader as a params object */}
